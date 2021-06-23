@@ -24,12 +24,12 @@ class Decks extends Component {
     }
 
     renderDeck = ({item}) => {
+        const {decks} = this.props;
         return (
-            <View style={styles.item}>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate("Deck", {deckId: item})}>
-                    <Text>{item}</Text>
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate("Deck", {deckId: item})} style={styles.item}>
+                <Text style={{fontSize: 18}}>{item}</Text>
+                <Text style={{fontSize: 16}}>{decks[item].questions.length} cards</Text>
+            </TouchableOpacity>
         )
     };
 
@@ -59,12 +59,14 @@ const styles = StyleSheet.create({
     },
     item: {
         backgroundColor: white,
-        borderRadius: Platform.OS === "ios" ? 16 : 2,
+        borderRadius: Platform.OS === "ios" ? 10 : 2,
         padding: 20,
         marginLeft: 10,
         marginRight: 10,
         marginTop: 17,
-        justifyContent: 'center',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexDirection: 'row',
         shadowRadius: 3,
         shadowOpacity: 0.8,
         shadowColor: 'rgba(0,0,0,0.24)',
@@ -78,6 +80,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (decks) => {
     return {
+        decks,
         deckIds: Object.keys(decks)
     }
 };

@@ -3,7 +3,7 @@ import {Platform}                       from "react-native";
 import {createBottomTabNavigator}       from "@react-navigation/bottom-tabs";
 import {createMaterialTopTabNavigator}  from "@react-navigation/material-top-tabs";
 import {FontAwesome}                    from "@expo/vector-icons";
-import {purple, white}                  from "../utils/colors";
+import {lightBlue, white}               from "../utils/colors";
 import Decks                            from "./Decks";
 import AddDeck                          from "./AddDeck";
 
@@ -32,11 +32,11 @@ const TabNav = () => (
         })}
         tabBarOptions={{
             header: null,
-            activeTintColor: Platform.OS === "ios" ? purple : white,
+            activeTintColor: Platform.OS === "ios" ? lightBlue : white,
             showIcon: true,
             style: {
                 height: 80,
-                backgroundColor: Platform.OS === "ios" ? white : purple,
+                backgroundColor: Platform.OS === "ios" ? white : lightBlue,
                 shadowColor: "rgba(0, 0, 0, 0.24)",
                 shadowOffset: {
                     width: 0,

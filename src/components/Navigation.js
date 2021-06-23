@@ -1,7 +1,7 @@
 import React                            from "react";
 import {createStackNavigator}           from "@react-navigation/stack";
 import {NavigationContainer}            from "@react-navigation/native";
-import {purple}                         from "../utils/colors";
+import {lightBlue}                      from "../utils/colors";
 import {View}                           from "react-native";
 import Constants                        from "expo-constants";
 import {StatusBar}                      from "expo-status-bar";
@@ -21,7 +21,7 @@ const Stack = createStackNavigator();
 const Navigation = () => {
     return (
         <NavigationContainer>
-            <FlashcardsStatusBar backgroundColor={purple} barStyle="light-content" />
+            <FlashcardsStatusBar backgroundColor={lightBlue} barStyle="light-content" />
             <Stack.Navigator headerMode="screen">
                 <Stack.Screen
                     name="Decks"

@@ -1,13 +1,13 @@
 import React, {Component}                   from 'react';
 import {
     KeyboardAvoidingView, Text,
-    StyleSheet, TextInput
+    StyleSheet, TextInput, View
 }                                           from 'react-native';
 import {connect}                            from "react-redux";
 import {addDeck}                            from "../actions";
 import {saveDeckTitle}                      from '../utils/api';
 import Button                               from "../ui-kit/Button";
-import {purple, red, white}                 from "../utils/colors";
+import {lightBlue, red, white}              from "../utils/colors";
 import {CommonActions}                      from '@react-navigation/native';
 
 class AddDeck extends Component {
@@ -68,17 +68,23 @@ class AddDeck extends Component {
 
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
-                <Text style={styles.info}>Enter deck title</Text>
-                <TextInput
-                    style={[styles.field]}
-                    onChangeText={this.onChangeText}
-                    value={title}
-                    placeholder="Deck title"
-                />
-                <Button style={{width: 200}} disabled={!title.trim()} onPress={this.handleAddDeck}>
-                    <Text style={styles.text}>Add Deck</Text>
-                </Button>
-                {!!message && <Text style={styles.message}>{message}</Text>}
+                <View style={{alignItems: 'center'}}>
+                    <Text style={styles.info}>
+                        Please, enter the title of your new deck
+                    </Text>
+                    <TextInput
+                        style={[styles.field]}
+                        onChangeText={this.onChangeText}
+                        value={title}
+                        placeholder="Deck title"
+                    />
+                </View>
+                <View>
+                    <Button disabled={!title.trim()} onPress={this.handleAddDeck}>
+                        <Text style={styles.text}>Add Deck</Text>
+                    </Button>
+                    {!!message && <Text style={styles.message}>{message}</Text>}
+                </View>
             </KeyboardAvoidingView>
         )
     }
@@ -87,7 +93,7 @@ class AddDeck extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
+        justifyContent: 'space-around',
         padding: 40,
     },
     text: {
@@ -103,7 +109,7 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         borderRadius: 4,
         fontSize: 16,
-        borderColor: purple,
+        borderColor: lightBlue,
         marginBottom: 24
     },
     message: {

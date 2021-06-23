@@ -1,6 +1,6 @@
 import React                                    from 'react';
 import {TouchableOpacity, StyleSheet, View}     from 'react-native';
-import {purple}                                 from "../utils/colors";
+import {lightBlue}                              from "../utils/colors";
 
 function Button({children, onPress, disabled, style = {}}) {
 
@@ -24,7 +24,8 @@ function Button({children, onPress, disabled, style = {}}) {
 
 const styles = StyleSheet.create({
     btn: {
-        backgroundColor: purple,
+        backgroundColor: lightBlue,
+        borderColor: lightBlue,
         borderWidth: 1,
         borderRadius: 4,
         padding: 10,
