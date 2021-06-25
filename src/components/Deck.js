@@ -1,39 +1,47 @@
 import React, {Component}                   from 'react';
 import {View, Text, StyleSheet}             from 'react-native';
 import TextButton                           from "../ui-kit/TextButton";
-import {removeDeckByKey}                    from "../utils/api";
-import {removeDeck}                         from "../actions";
+import {handleRemoveDeck}                   from "../actions";
 import {connect}                            from "react-redux";
 import Button                               from "../ui-kit/Button";
-import {gray, lightBlue, red, white} from "../utils/colors";
+import {gray, lightBlue, red, white}        from "../utils/colors";
 
 class Deck extends Component {
     startQuiz = () => {
         console.log("goToStartQuiz")
     };
 
+    toHome = () => {
+        this.props.navigation.navigate("Decks");
+    };
+
     goToAddCard = () => {
-        console.log("goToAddCard")
+        const {deckId} = this.props;
+        this.props.navigation.navigate("AddCard", {deckId});
     };
 
     removeDeck = () => {
-        const {title} = this.props;
+        const {dispatch, deckId} = this.props;
 
-        dispatch(removeDeck(title));
-        removeDeckByKey({key: title});
+        dispatch(handleRemoveDeck(deckId));
+
+        this.toHome();
     };
 
     render() {
         const {data} = this.props;
-        const {title, questions} = data;
 
-        const count = questions.length;
+        if (!data) {
+            return null;
+        }
+
+        const {title, questions} = data;
 
         return (
             <View style={styles.container}>
                 <View style={{alignItems: 'center'}}>
                     <Text style={{fontSize: 32}}>{title}</Text>
-                    <Text style={{fontSize: 18, marginTop: 10, color: gray}}>{count} cards</Text>
+                    <Text style={{fontSize: 18, marginTop: 10, color: gray}}>{questions.length} cards</Text>
                 </View>
                 <View>
                     <Button style={[styles.btn, styles.light]} onPress={this.goToAddCard}>
@@ -87,10 +95,4 @@ const mapStateToProps = (state, {route}) => {
     }
 };
 
-function mapDispatchToProps(dispatch, {route, navigation}) {
-    return {
-        goBack: () => navigation.goBack()
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Deck);
+export default connect(mapStateToProps)(Deck);

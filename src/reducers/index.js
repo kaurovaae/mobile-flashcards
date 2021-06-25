@@ -1,6 +1,8 @@
 import {RECEIVE_DECKS, ADD_DECK, ADD_QUESTION, REMOVE_DECK} from "../actions";
+import {AsyncStorage} from "react-native";
+import {DECKS_STORAGE_KEY} from "../utils/_flashcards";
 
-function decks (state = {}, action) {
+function decks (state = null, action) {
     switch(action.type) {
         case RECEIVE_DECKS:
             return {
@@ -8,27 +10,39 @@ function decks (state = {}, action) {
                 ...action.decks
             };
         case ADD_DECK:
-            return {
+            const stateWithAddedDeck = {
                 ...state,
-                ...action.deck
-            };
-        case REMOVE_DECK:
-            const newState = {...state};
-
-            newState[action.title] = undefined;
-            delete newState[action.title];
-
-            return {
-                ...newState
-            };
-        case ADD_QUESTION:
-            return {
-                ...state,
-                [action.title]: {
-                    ...state[action.title],
-                    questions: state[action.title].questions.concat([action.card])
+                [action.deck.title]: {
+                    ...action.deck
                 }
             };
+
+            AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(stateWithAddedDeck));
+
+            return stateWithAddedDeck;
+        case REMOVE_DECK:
+            const stateWithoutDeck = {
+                ...state
+            };
+
+            stateWithoutDeck[action.deckId] = undefined;
+            delete stateWithoutDeck[action.deckId];
+
+            AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(stateWithoutDeck));
+
+            return stateWithoutDeck;
+        case ADD_QUESTION:
+            const stateWithQuestion = {
+                ...state,
+                [action.deckId]: {
+                    ...state[action.deckId],
+                    questions: state[action.deckId].questions.concat([action.card])
+                }
+            };
+
+            AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(stateWithQuestion));
+
+            return stateWithQuestion;
         default:
             return state;
     }

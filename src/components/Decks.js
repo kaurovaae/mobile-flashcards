@@ -4,8 +4,7 @@ import {
     FlatList, StyleSheet, Platform
 }                                           from 'react-native';
 import {connect}                            from "react-redux";
-import {getDecks}                           from "../utils/api";
-import {receiveDecks}                       from "../actions";
+import {handleReceiveDecks}                 from "../actions";
 import {white}                              from "../utils/colors";
 
 class Decks extends Component {
@@ -14,13 +13,10 @@ class Decks extends Component {
     };
 
     componentDidMount() {
-        const {dispatch} = this.props;
-
-        getDecks()
-            .then(decks => dispatch(receiveDecks(decks)))
-            .then(() => this.setState({
-                ready: true
-            }));
+        this.props.dispatch(handleReceiveDecks());
+        this.setState({
+            ready: true
+        });
     }
 
     renderDeck = ({item}) => {
@@ -81,7 +77,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (decks) => {
     return {
         decks,
-        deckIds: Object.keys(decks)
+        deckIds: decks ? Object.keys(decks) : []
     }
 };
 

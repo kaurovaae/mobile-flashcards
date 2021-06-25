@@ -1,13 +1,18 @@
 import React                                    from 'react';
-import {TouchableOpacity, StyleSheet, View}     from 'react-native';
-import {lightBlue}                              from "../utils/colors";
+import {
+    TouchableOpacity, StyleSheet,
+    View, Text
+}                                               from 'react-native';
+import {lightBlue, white} from "../utils/colors";
 
 function Button({children, onPress, disabled, style = {}}) {
+
+    const text = <Text style={styles.text}>{children}</Text>;
 
     if (disabled) {
         return (
             <View style={[styles.btn, styles.disabled, style]}>
-                {children}
+                {text}
             </View>
         )
     }
@@ -17,7 +22,7 @@ function Button({children, onPress, disabled, style = {}}) {
             style={[styles.btn, style]}
             onPress={onPress}
         >
-            {children}
+            {text}
         </TouchableOpacity>
     )
 }
@@ -34,6 +39,11 @@ const styles = StyleSheet.create({
     },
     disabled: {
         opacity: 0.4
+    },
+    text: {
+        color: white,
+        textAlign: 'center',
+        fontSize: 18
     }
 });
 

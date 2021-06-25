@@ -1,14 +1,11 @@
 import React, {Component}                   from 'react';
-import {
-    KeyboardAvoidingView, Text,
-    StyleSheet, TextInput, View
-}                                           from 'react-native';
+import {Text, StyleSheet, View}             from 'react-native';
 import {connect}                            from "react-redux";
-import {addDeck}                            from "../actions";
-import {saveDeckTitle}                      from '../utils/api';
+import {handleAddDeck}                      from "../actions";
 import Button                               from "../ui-kit/Button";
-import {lightBlue, red, white}              from "../utils/colors";
-import {CommonActions}                      from '@react-navigation/native';
+import Field                                from "../ui-kit/Field";
+import Form                                 from "../ui-kit/Form";
+import {red}                                from "../utils/colors";
 
 class AddDeck extends Component {
     state = {
@@ -17,9 +14,7 @@ class AddDeck extends Component {
     };
 
     toHome = () => {
-        this.props.navigation.dispatch(CommonActions.goBack({
-            key: 'Home'
-        }))
+        this.props.navigation.navigate("Decks");
     };
 
     handleAddDeck = () => {
@@ -37,14 +32,7 @@ class AddDeck extends Component {
             return;
         }
 
-        const deck = {
-            title,
-            questions: []
-        };
-
-        dispatch(addDeck({
-            [title]: deck
-        }));
+        dispatch(handleAddDeck(title));
 
         this.setState(() => ({
             title: '',
@@ -52,8 +40,6 @@ class AddDeck extends Component {
         }));
 
         this.toHome();
-
-        saveDeckTitle(title, deck);
     };
 
     onChangeText = (text) => {
@@ -67,51 +53,29 @@ class AddDeck extends Component {
         const {title, message} = this.state;
 
         return (
-            <KeyboardAvoidingView behavior='padding' style={styles.container}>
-                <View style={{alignItems: 'center'}}>
+            <Form style={{flex: 1}}>
+                <View>
                     <Text style={styles.info}>
                         Please, enter the title of your new deck
                     </Text>
-                    <TextInput
-                        style={[styles.field]}
-                        onChangeText={this.onChangeText}
+                    <Field
                         value={title}
                         placeholder="Deck title"
+                        onChangeText={this.onChangeText}
                     />
                 </View>
                 <View>
                     <Button disabled={!title.trim()} onPress={this.handleAddDeck}>
-                        <Text style={styles.text}>Add Deck</Text>
+                        Add Deck
                     </Button>
                     {!!message && <Text style={styles.message}>{message}</Text>}
                 </View>
-            </KeyboardAvoidingView>
+            </Form>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'space-around',
-        padding: 40,
-    },
-    text: {
-        color: white,
-        textAlign: 'center',
-        fontSize: 18
-    },
-    field: {
-        width: 200,
-        borderWidth: 1,
-        padding: 16,
-        paddingTop: 10,
-        paddingBottom: 10,
-        borderRadius: 4,
-        fontSize: 16,
-        borderColor: lightBlue,
-        marginBottom: 24
-    },
     message: {
         fontSize: 16,
         marginTop: 24,

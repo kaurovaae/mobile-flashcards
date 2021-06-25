@@ -22,7 +22,7 @@ const TabNav = () => (
                     icon = (
                         <FontAwesome name="bars" size={size} color={color} />
                     );
-                } else if (route.name === "Add Deck") {
+                } else if (route.name === "AddDeck") {
                     icon = (
                         <FontAwesome name="plus-square" size={size} color={color} />
                     );
@@ -48,7 +48,7 @@ const TabNav = () => (
         }}
     >
         <Tabs.Screen name="Decks" component={Decks} />
-        <Tabs.Screen name="Add Deck" component={AddDeck} />
+        <Tabs.Screen name="AddDeck" component={AddDeck} />
     </Tabs.Navigator>
 );
 

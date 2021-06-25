@@ -1,9 +1,11 @@
 import React, {Component}           from 'react';
-import {View}                       from 'react-native';
-import TextButton                   from '../ui-kit/TextButton';
+import {View, Text}                 from 'react-native';
 import {connect}                    from "react-redux";
-import {addCard}                    from "../actions";
-import {addCardToDeck}              from '../utils/api';
+import {handleAddCard}              from "../actions";
+import Field                        from "../ui-kit/Field";
+import Form                         from "../ui-kit/Form";
+import Button                       from "../ui-kit/Button";
+import {CommonActions}              from "@react-navigation/native";
 
 class AddCard extends Component {
     state = {
@@ -11,8 +13,12 @@ class AddCard extends Component {
         answer: ''
     };
 
+    toHome = () => {
+        this.props.navigation.dispatch(CommonActions.goBack())
+    };
+
     addCard = () => {
-        const {dispatch} = this.props;
+        const {dispatch, deckId} = this.props;
         const {question, answer} = this.state;
 
         if (question === '' || answer === '') {
@@ -25,18 +31,54 @@ class AddCard extends Component {
             answer
         };
 
-        dispatch(addCard(title, card));
+        dispatch(handleAddCard(deckId, card));
 
-        addCardToDeck({title, card});
+        this.toHome();
+    };
+
+    changeQuestion = (question) => {
+        this.setState(() => ({
+            question
+        }));
+    };
+
+    changeAnswer = (answer) => {
+        this.setState(() => ({
+            answer
+        }));
     };
 
     render() {
+        const {question, answer} = this.state;
+
         return (
-            <View>
-                <TextButton onPress={this.addCard}>Add Card</TextButton>
-            </View>
+            <Form>
+                <View>
+                    <Field
+                        value={question}
+                        placeholder="Question"
+                        onChangeText={this.changeQuestion}
+                    />
+                    <Field
+                        value={answer}
+                        placeholder="Answer"
+                        onChangeText={this.changeAnswer}
+                    />
+                </View>
+                <Button onPress={this.addCard} disabled={!question.trim() || !answer.trim()}>
+                    Add Card
+                </Button>
+            </Form>
         )
     }
 }
 
-export default connect()(AddCard);
+const mapStateToProps = (state, {route}) => {
+    const {deckId} = route.params;
+
+    return {
+        deckId
+    }
+};
+
+export default connect(mapStateToProps)(AddCard);

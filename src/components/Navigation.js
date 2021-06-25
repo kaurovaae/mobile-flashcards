@@ -7,6 +7,7 @@ import Constants                        from "expo-constants";
 import {StatusBar}                      from "expo-status-bar";
 import Deck                             from "./Deck";
 import TabNav                           from './TabNavigation';
+import AddCard                          from "./AddCard";
 
 function FlashcardsStatusBar({backgroundColor, ...props}) {
     return (
@@ -29,19 +30,16 @@ const Navigation = () => {
                     options={{headerShown: false}}
                 />
                 <Stack.Screen
-                    name="Add Deck"
+                    name="AddDeck"
                     component={TabNav}
+                />
+                <Stack.Screen
+                    name="AddCard"
+                    component={AddCard}
                 />
                 <Stack.Screen
                     name="Deck"
                     component={Deck}
-                    options={({route}) => {
-                        const {title} = route.params;
-
-                        return {
-                            title
-                        }
-                    }}
                 />
             </Stack.Navigator>
         </NavigationContainer>
