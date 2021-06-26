@@ -1,5 +1,5 @@
 import {AsyncStorage} from "react-native";
-import {DECKS_STORAGE_KEY} from "../utils/_flashcards";
+import {DECKS_STORAGE_KEY} from "../utils/helpers";
 import {initData} from '../utils/helpers';
 
 export const RECEIVE_DECKS = 'RECEIVE_DECKS';

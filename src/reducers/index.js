@@ -1,6 +1,11 @@
-import {RECEIVE_DECKS, ADD_DECK, ADD_QUESTION, REMOVE_DECK} from "../actions";
-import {AsyncStorage} from "react-native";
-import {DECKS_STORAGE_KEY} from "../utils/_flashcards";
+import {
+    RECEIVE_DECKS,
+    ADD_DECK,
+    ADD_QUESTION,
+    REMOVE_DECK
+}                                           from "../actions";
+import {AsyncStorage}                       from "react-native";
+import {DECKS_STORAGE_KEY}                  from "../utils/helpers";
 
 function decks (state = null, action) {
     switch(action.type) {

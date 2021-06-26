@@ -1,10 +1,12 @@
-import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {connect} from 'react-redux';
-import TextButton from "../ui-kit/TextButton";
-import Button from "../ui-kit/Button";
-import Form from "../ui-kit/Form";
-import {lightBlue, white} from "../utils/colors";
+import React, {Component}               from 'react';
+import {View, Text, StyleSheet}         from 'react-native';
+import {connect}                        from 'react-redux';
+import TextButton                       from "../ui-kit/TextButton";
+import Button                           from "../ui-kit/Button";
+import Form                             from "../ui-kit/Form";
+import {lightBlue, white}               from "../utils/colors";
+import {clearLocalNotification}         from "../utils/helpers";
+import {setLocalNotification}           from "../utils/helpers";
 
 class Quiz extends Component {
     state = {
@@ -21,6 +23,13 @@ class Quiz extends Component {
     };
 
     count = (isCorrect) => {
+        const {step} = this.state;
+        const {questions} = this.props;
+        if (step === questions.length) {
+            clearLocalNotification()
+                .then(setLocalNotification)
+        }
+
         this.setState(prevState => ({
             ...prevState,
             showAnswer: false,

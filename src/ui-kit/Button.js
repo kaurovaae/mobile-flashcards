@@ -3,7 +3,7 @@ import {
     TouchableOpacity, StyleSheet,
     View, Text
 }                                               from 'react-native';
-import {lightBlue, white} from "../utils/colors";
+import {lightBlue, white}                       from "../utils/colors";
 
 function Button({children, onPress, disabled, style = {}}) {
 
