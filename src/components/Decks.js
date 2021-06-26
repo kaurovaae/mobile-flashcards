@@ -34,11 +34,19 @@ class Decks extends Component {
 
         return (
             <View style={styles.container}>
-                <FlatList
-                    data={deckIds}
-                    renderItem={this.renderDeck}
-                    keyExtractor={(item, index) => `${item}_${index}`}
-                />
+                {!!deckIds.length ? (
+                    <FlatList
+                        data={deckIds}
+                        renderItem={this.renderDeck}
+                        keyExtractor={(item, index) => `${item}_${index}`}
+                    />
+                ) : (
+                    <View style={styles.noData}>
+                        <Text style={styles.noDataText}>
+                            There are no decks yet. Add new deck and try again.
+                        </Text>
+                    </View>
+                )}
             </View>
         )
     }
@@ -46,20 +54,27 @@ class Decks extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        paddingTop: 20,
+        paddingBottom: 40
     },
     noDataText: {
         fontSize: 20,
-        paddingTop: 20,
-        paddingBottom: 20
+        textAlign: 'center',
+        paddingLeft: 20,
+        paddingRight: 20,
+    },
+    noData: {
+        flex: 1,
+        justifyContent: 'center'
     },
     item: {
         backgroundColor: white,
         borderRadius: Platform.OS === "ios" ? 10 : 2,
         padding: 20,
-        marginLeft: 10,
-        marginRight: 10,
-        marginTop: 17,
+        marginBottom: 16,
+        marginLeft: 20,
+        marginRight: 20,
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',

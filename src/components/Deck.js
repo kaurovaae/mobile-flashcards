@@ -8,7 +8,8 @@ import {gray, lightBlue, red, white}        from "../utils/colors";
 
 class Deck extends Component {
     startQuiz = () => {
-        console.log("goToStartQuiz")
+        const {deckId, navigation} = this.props;
+        navigation.navigate("Quiz", {deckId});
     };
 
     toHome = () => {
@@ -16,8 +17,8 @@ class Deck extends Component {
     };
 
     goToAddCard = () => {
-        const {deckId} = this.props;
-        this.props.navigation.navigate("AddCard", {deckId});
+        const {deckId, navigation} = this.props;
+        navigation.navigate("AddCard", {deckId});
     };
 
     removeDeck = () => {
@@ -48,7 +49,7 @@ class Deck extends Component {
                         <Text style={[styles.text, styles.lightText]}>Add Card</Text>
                     </Button>
                     <Button style={styles.btn} onPress={this.startQuiz}>
-                        <Text style={styles.text}> Start Quiz</Text>
+                        <Text style={styles.text}>Start Quiz</Text>
                     </Button>
                     <TextButton style={styles.textBtn} onPress={this.removeDeck}>
                         Remove Deck

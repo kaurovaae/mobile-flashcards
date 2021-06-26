@@ -13,10 +13,6 @@ class AddDeck extends Component {
         message: ''
     };
 
-    toHome = () => {
-        this.props.navigation.navigate("Decks");
-    };
-
     handleAddDeck = () => {
         const {dispatch, existIds} = this.props;
         const {title} = this.state;
@@ -33,13 +29,14 @@ class AddDeck extends Component {
         }
 
         dispatch(handleAddDeck(title));
+        const deckId = title;
 
         this.setState(() => ({
             title: '',
             message: ''
         }));
 
-        this.toHome();
+        this.props.navigation.navigate("Deck", {deckId});
     };
 
     onChangeText = (text) => {
@@ -66,7 +63,7 @@ class AddDeck extends Component {
                 </View>
                 <View>
                     <Button disabled={!title.trim()} onPress={this.handleAddDeck}>
-                        Add Deck
+                        Create Deck
                     </Button>
                     {!!message && <Text style={styles.message}>{message}</Text>}
                 </View>

@@ -43,7 +43,9 @@ const TabNav = () => (
                     height: 3
                 },
                 shadowRadius: 6,
-                shadowOpacity: 1
+                shadowOpacity: 1,
+                paddingBottom: 20,
+                paddingTop: 20
             }
         }}
     >

@@ -16,9 +16,9 @@ function receiveDecks(decks) {
 
 export function handleReceiveDecks() {
     return (dispatch) => {
+        // AsyncStorage.clear();
         AsyncStorage.getItem(DECKS_STORAGE_KEY)
             .then(results => {
-                console.log("results", results)
                 let decks;
                 if (!results) {
                     decks = initData;

@@ -13,7 +13,7 @@ class AddCard extends Component {
         answer: ''
     };
 
-    toHome = () => {
+    goBack = () => {
         this.props.navigation.dispatch(CommonActions.goBack())
     };
 
@@ -33,7 +33,7 @@ class AddCard extends Component {
 
         dispatch(handleAddCard(deckId, card));
 
-        this.toHome();
+        this.goBack();
     };
 
     changeQuestion = (question) => {
@@ -66,7 +66,7 @@ class AddCard extends Component {
                     />
                 </View>
                 <Button onPress={this.addCard} disabled={!question.trim() || !answer.trim()}>
-                    Add Card
+                    Submit
                 </Button>
             </Form>
         )
