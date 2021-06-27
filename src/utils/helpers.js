@@ -65,13 +65,29 @@ export function setLocalNotification() {
 
                             let tomorrow = new Date();
                             tomorrow.setDate(tomorrow.getDate() + 1);
-                            tomorrow.setHours(17);
-                            tomorrow.setMinutes(0);
 
-                            const trigger = {
-                                time: tomorrow,
-                                repeat: 'day',
-                            };
+                            const day = tomorrow.getDay();
+                            const month = tomorrow.getMonth();
+                            const year = tomorrow.getFullYear();
+                            const hour = 17;
+                            const minute = 0;
+
+                            const trigger = Platform.OS === "ios"
+                                ? {
+                                    type: 'calendar',
+                                    repeats: true,
+                                    dateComponents: {
+                                        month,
+                                        year,
+                                        day,
+                                        hour,
+                                        minute
+                                    }
+                                } : {
+                                    hour,
+                                    minute,
+                                    repeats: true
+                                };
 
                             Notifications.scheduleNotificationAsync({
                                 content: createNotification(),
