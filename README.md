@@ -56,6 +56,7 @@ Logic for notification has been implemented. Notifications are generated at a sp
 ### Test data
 Project starts with the test data: 
 
+<pre>
 {
   React: {
     title: 'React',
@@ -80,6 +81,7 @@ Project starts with the test data:
     ]
   }
 }
+</pre>
 
 ### Supported platforms
 iOS, Android
