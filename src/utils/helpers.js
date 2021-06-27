@@ -41,15 +41,10 @@ function createNotification () {
     return {
         title: 'How about quiz?',
         body: "👋 Don't forget to quiz today!",
-        ios: {
-            sound: true,
-        },
-        android: {
-            sound: true,
-            priority: 'high',
-            sticky: false,
-            vibrate: true,
-        }
+        sound: true,
+        priority: 'high',
+        sticky: false,
+        vibrate: true
     }
 }
 
