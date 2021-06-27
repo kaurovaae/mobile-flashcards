@@ -42,7 +42,7 @@ Displays:
  - an option to submit the new question
 
 ## Data
-`AsyncStorage` to store our decks and flashcards.
+To store decks and flashcards `AsyncStorage` is used.
 
 Each deck creates a new key on the object. 
 Each deck has a `title` and a `questions key. 
