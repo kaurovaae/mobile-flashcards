@@ -49,11 +49,6 @@ Each deck has a `title` and a `questions key.
 `Title` is the title for the specific deck.
 `Questions` is an array of questions and answers for that deck.
 
-## Notifications 
-
-Logic for notification has been implemented. Notifications are generated at a specific time if the user hasn't completed at least one quiz for that day.
-
-### Test data
 Project starts with the test data: 
 
 <pre>
@@ -82,6 +77,10 @@ Project starts with the test data:
   }
 }
 </pre>
+
+## Notifications 
+
+Logic for notification has been implemented. Notifications are generated at a specific time if the user hasn't completed at least one quiz for that day.
 
 ### Supported platforms
 iOS, Android
