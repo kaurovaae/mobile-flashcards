@@ -86,7 +86,7 @@ Logic for notification has been implemented. Notifications are generated at a sp
 iOS, Android
 
 ### Fast start
-Clone the repository: `git clone https://github.com/AnitaChess/mobile-flashcards.git`
+Clone the repository: `git clone https://github.com/kaurovaae/mobile-flashcards.git`
 
 In the project directory, you can run:
 - `npm install` (install dependencies)
